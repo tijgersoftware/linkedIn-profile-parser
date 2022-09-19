@@ -1,16 +1,16 @@
-<Team-algemene-informatie>
+<TeamAlgemeneInformatie>
 	<Voornaam>
 		Gilles
 	</Voornaam>
 	<Naam>
 		Hamelink
 	</Naam>
-	<E-Mail>
+	<eMail>
 		gilles@test.com
-	</E-Mail>
-	<Straat-nummer>
+	</eMail>
+	<StraatNummer>
 		test straat 12
-	</Straat-nummer>
+	</StraatNummer>
 	<Postcode>
 		2000
 	</Postcode>
@@ -32,17 +32,17 @@
 	<Rijbewijs>
 		ja
 	</Rijbewijs>
-	<Huidige-functie>
+	<HuidigeFunctie>
 		sotfware developper
-	</Huidige-functie>
-	<Linkedin-url>
+	</HuidigeFunctie>
+	<LinkedinUrl>
 		https//
-	</Linkedin-url>
-	<Korte-Introductie>
+	</LinkedinUrl>
+	<KorteIntroductie>
 		Ik maak de linked in profielen automatisch updaten
-	</Korte-Introductie>
-</Team-algemene-informatie>
-<Honor-Rewards>
+	</KorteIntroductie>
+</TeamAlgemeneInformatie>
+<HonorRewards>
 <Organisatie>testOrganisatie</Organisatie>
 
 <Maand>Maart</Maand>
@@ -54,4 +54,4 @@
 <Associated>testAssociated</Associated>
 
 <Beschrijvingsveld>testBeschrijvingsveld</Beschrijvingsveld>
-</Honor-Rewards>
+</HonorRewards>
