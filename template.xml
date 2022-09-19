@@ -1,0 +1,57 @@
+<Team-algemene-informatie>
+	<Voornaam>
+		Gilles
+	</Voornaam>
+	<Naam>
+		Hamelink
+	</Naam>
+	<E-Mail>
+		gilles@test.com
+	</E-Mail>
+	<Straat-nummer>
+		test straat 12
+	</Straat-nummer>
+	<Postcode>
+		2000
+	</Postcode>
+	<Stad>
+		Antwerpen
+	</Stad>
+	<Land>
+		België
+	</Land>
+	<Telefoon>
+		0489999999
+	</Telefoon>
+	<Nationaliteit>
+		Belg
+	</Nationaliteit>
+	<Geboortedag>
+		17/03/15000
+	</Geboortedag>
+	<Rijbewijs>
+		ja
+	</Rijbewijs>
+	<Huidige-functie>
+		sotfware developper
+	</Huidige-functie>
+	<Linkedin-url>
+		https//
+	</Linkedin-url>
+	<Korte-Introductie>
+		Ik maak de linked in profielen automatisch updaten
+	</Korte-Introductie>
+</Team-algemene-informatie>
+<Honor-Rewards>
+<Organisatie>testOrganisatie</Organisatie>
+
+<Maand>Maart</Maand>
+
+<Jaar>2000</Jaar>
+
+<Afbeelding>http://placekitten.com/200/300</Afbeelding>
+
+<Associated>testAssociated</Associated>
+
+<Beschrijvingsveld>testBeschrijvingsveld</Beschrijvingsveld>
+</Honor-Rewards>
