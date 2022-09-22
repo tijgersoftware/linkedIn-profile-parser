@@ -1,132 +1,63 @@
-{
-    "public_identifier": "lucclaeys",
-    "profile_pic_url": "https://media-exp1.licdn.com/dms/image/C4E03AQHKPrZW5fO0tg/profile-displayphoto-shrink_400_400/0/1557921744551?e=1668038400&v=beta&t=LKBvcjSUnQLRpmFHHXNjUGPGFHcxD65JNWJ62tu87uc",
+[
+  {
+    "public_identifier": "panagiotis-m-ab5b6a2a",
+    "profile_pic_url": null,
     "background_cover_image_url": null,
-    "first_name": "Luc",
-    "last_name": "Claeys",
-    "full_name": "Luc Claeys",
-    "occupation": "Partner at marionmaakt. at Marion Maakt",
-    "headline": "Managing Partner at Dazzle, Partner at MarionMaakt",
-    "summary": "Consultant/coach for start-up's in a B2B environment. \nConsultative sales expert.\nSerial entrepreneur. ",
-    "country": "BE",
-    "country_full_name": "Belgium",
-    "city": "Ghent Metropolitan Area",
+    "first_name": "Panagiotis",
+    "last_name": "M.",
+    "full_name": "Panagiotis M.",
+    "occupation": "Drupal Developer at E-Sepia Web Innovation",
+    "headline": "Drupal Developer at E-Sepia Web Innovation",
+    "summary": null,
+    "country": "GR",
+    "country_full_name": "Greece",
+    "city": null,
     "state": null,
     "experiences": [
       {
-        "starts_at": { "day": 1, "month": 4, "year": 2011 },
-        "ends_at": { "day": 31, "month": 3, "year": 2015 },
-        "company": "Pure Sign",
-        "company_linkedin_profile_url": "https://www.linkedin.com/company/pure-sign/",
-        "title": "Business Development, Strategy Consultant",
-        "description": null,
-        "location": "Gent Area, Belgium",
-        "logo_url": "https://media-exp1.licdn.com/dms/image/C4E0BAQF5RsayG0HaQA/company-logo_400_400/0/1519901042172?e=1670457600&v=beta&t=3aSZ97YGx7e5DXIRXrCJfKVPfwLOR5PWuYnsaJK5lqE"
-      },
-      {
-        "starts_at": { "day": 1, "month": 1, "year": 2006 },
-        "ends_at": { "day": 30, "month": 4, "year": 2013 },
-        "company": "SalesHammer N.V.",
-        "company_linkedin_profile_url": "https://www.linkedin.com/company/saleshammer-n.v./",
-        "title": "Strategic Sales Consultant, Owner",
-        "description": "Management consulting & operational sales.",
-        "location": "Antwerp Area, Belgium",
-        "logo_url": null
-      },
-      {
-        "starts_at": { "day": 1, "month": 10, "year": 2020 },
+        "starts_at": { "day": 1, "month": 11, "year": 2014 },
         "ends_at": null,
-        "company": "Marion Maakt",
-        "company_linkedin_profile_url": null,
-        "title": "Partner at marionmaakt.",
+        "company": "E-Sepia Web Innovation",
+        "company_linkedin_profile_url": "https://www.linkedin.com/company/e-sepia/",
+        "title": "Drupal Developer",
         "description": null,
-        "location": "Ghent, Flemish Region, Belgium",
-        "logo_url": null
+        "location": "Athens, Greece",
+        "logo_url": "https://media-exp1.licdn.com/dms/image/C560BAQHvShKRtLln3A/company-logo_400_400/0/1537741745962?e=1671667200&v=beta&t=sYCxWSrwt15K6JNVk07koiMTg9-NF6l_FDxaVk0GMzQ"
       },
       {
-        "starts_at": { "day": 1, "month": 4, "year": 2015 },
-        "ends_at": null,
-        "company": "Dazzle BV",
-        "company_linkedin_profile_url": null,
-        "title": "Managing Partner",
-        "description": "Digital agency (Drupal and Wordpress, marketing automation and CRM) with 9 people. \nFantastic team and amazing customers.",
-        "location": "Brussels Area, Belgium",
-        "logo_url": null
-      },
-      {
-        "starts_at": { "day": 1, "month": 11, "year": 2005 },
-        "ends_at": { "day": 31, "month": 3, "year": 2007 },
-        "company": "Easi N.V.",
-        "company_linkedin_profile_url": null,
-        "title": "Director",
-        "description": "Easi is a Belgian company specialised in ERP and collaboration management.  I was responsible for the Dutch speaking part of Belgium.",
-        "location": "Gent Area, Belgium",
-        "logo_url": null
-      },
-      {
-        "starts_at": { "day": 1, "month": 4, "year": 1999 },
-        "ends_at": { "day": 30, "month": 4, "year": 2005 },
-        "company": "Axias N.V.",
-        "company_linkedin_profile_url": null,
-        "title": "Founding Partner, Managing Director",
-        "description": "Founder and Managing Director of Axias N.V. \nGrowth from 4 people in 1999 to 35 people in 2005.  Succesful in ERP (Mapics, Protean), CRM (Siebel) and Business Intelligence (Microsoft).",
-        "location": "Antwerp Area, Belgium",
-        "logo_url": null
-      },
-      {
-        "starts_at": { "day": 1, "month": 12, "year": 1993 },
-        "ends_at": { "day": 31, "month": 5, "year": 1999 },
-        "company": "VIA N.V.",
-        "company_linkedin_profile_url": null,
-        "title": "Founding Partner",
-        "description": "Founder of VIA N.V.\nManagement Consulting: guiding large organisations through their ERP selection process: consulting and project management.",
-        "location": "Antwerp Area, Belgium",
-        "logo_url": null
-      },
-      {
-        "starts_at": { "day": 1, "month": 6, "year": 1989 },
-        "ends_at": { "day": 29, "month": 2, "year": 1992 },
-        "company": "Proget N.V.",
-        "company_linkedin_profile_url": null,
-        "title": "Branch Manager",
-        "description": "IBM iSeries partner.",
-        "location": "Gent Area, Belgium",
-        "logo_url": null
-      },
-      {
-        "starts_at": { "day": 1, "month": 6, "year": 1986 },
-        "ends_at": { "day": 30, "month": 4, "year": 1989 },
-        "company": "Dolmen Computer Applications",
-        "company_linkedin_profile_url": null,
-        "title": "Sales Executive",
+        "starts_at": { "day": 1, "month": 2, "year": 2013 },
+        "ends_at": { "day": 30, "month": 6, "year": 2014 },
+        "company": "Netstudio",
+        "company_linkedin_profile_url": "https://www.linkedin.com/company/netstudio/",
+        "title": "Drupal Developer",
         "description": null,
-        "location": "Brussels Area, Belgium",
-        "logo_url": null
+        "location": "Athens, Greece",
+        "logo_url": "https://media-exp1.licdn.com/dms/image/C4E0BAQHRwU1pvej0cA/company-logo_400_400/0/1519892770508?e=1671667200&v=beta&t=FZ8BYxKrj8CnsQKuwnar56LyYBbotMPASwsBuv-BBJI"
       },
       {
-        "starts_at": { "day": 1, "month": 9, "year": 1983 },
-        "ends_at": { "day": 31, "month": 5, "year": 1986 },
-        "company": "Unilever",
-        "company_linkedin_profile_url": "https://www.linkedin.com/company/unilever/",
-        "title": "Systems Analyst",
+        "starts_at": { "day": 1, "month": 5, "year": 2010 },
+        "ends_at": { "day": 28, "month": 2, "year": 2013 },
+        "company": "Avalon Web and Media",
+        "company_linkedin_profile_url": null,
+        "title": "Drupal Developer",
         "description": null,
-        "location": "Brussels Area, Belgium",
-        "logo_url": "https://media-exp1.licdn.com/dms/image/C4E0BAQFC-wGW2UwMIQ/company-logo_400_400/0/1593590505853?e=1670457600&v=beta&t=lLN5g0eo5jmDjUVcC48rBgfczM4WgCMLZsJnVVi3Ras"
+        "location": "Athens, Greece",
+        "logo_url": null
       }
     ],
     "education": [
       {
-        "starts_at": { "day": 1, "month": 1, "year": 1978 },
-        "ends_at": { "day": 31, "month": 12, "year": 1983 },
-        "field_of_study": "Busines Administration & Computer Applications",
-        "degree_name": "Master's degree",
-        "school": "KU Leuven",
+        "starts_at": { "day": 1, "month": 1, "year": 2004 },
+        "ends_at": { "day": 31, "month": 12, "year": 2009 },
+        "field_of_study": "Computer Science",
+        "degree_name": "University Degree",
+        "school": "Technologiko Ekpaideutiko Idrima, Athinas",
         "school_linkedin_profile_url": null,
         "description": null,
-        "logo_url": "https://media-exp1.licdn.com/dms/image/C560BAQHAtw6LesXG-w/company-logo_400_400/0/1519856403240?e=1670457600&v=beta&t=pwJ3GevhTlfEsQ3D9oOpOBQeZQgxagJyC3FCMyc7sI0"
+        "logo_url": "https://media-exp1.licdn.com/dms/image/C4E0BAQG407FrmmS-rA/company-logo_400_400/0/1519866782423?e=1671667200&v=beta&t=aMlqsxu7KE-Gr_rAwDHrwqfdkV5ikZ2P_BLLNLbM644"
       }
     ],
-    "languages": ["Dutch", "English", "French", "German"],
+    "languages": ["English", "French", "Greek"],
     "accomplishment_organisations": [],
     "accomplishment_publications": [],
     "accomplishment_honors_awards": [],
@@ -134,31 +65,491 @@
     "accomplishment_courses": [],
     "accomplishment_projects": [],
     "accomplishment_test_scores": [],
-    "volunteer_work": [
-      {
-        "starts_at": { "day": 1, "month": 4, "year": 2018 },
-        "ends_at": null,
-        "title": "Mentor",
-        "cause": "Economic_empowerment",
-        "company": "https://www.duoforajob.be/",
-        "company_linkedin_profile_url": null,
-        "description": null,
-        "logo_url": null
-      }
-    ],
+    "volunteer_work": [],
     "certifications": [],
     "connections": null,
     "people_also_viewed": [],
-    "recommendations": [
-      "Ludwig Bastiaansen\n\n\n\nLuc has been a real asset in identifying the needs/ shortcomings in our sales organization. His support resulted in a more focussed group of sales people with a better understanding of key account management. A very personalized approach helped to take the boundaries down.",
-      "Mathieu Pape\n\n\n\nExtremely driven and enthusiasming, always looking for new ideas and approaches, Luc knows how to motivate a team he's leading. A no-nonsense man going straigth to point.",
-      "Luc Leysen\n\n\n\nLife at VIA was just fantastic. Especially for our customers, but also for us. A time not to forget.",
-      "Michael Cassiers\n\n\n\nI worked with Luc on a number of projects. He is a sharp thinker and a great no-nonsense sales person. While doing a customer satisfaction survey for Axias, I repeatedly heard from several sources that Luc was considered a reliable professional, a man of his word. Despite the fast growth of Axias, Luc managed to create a great spirit among his employees.",
-      "Marc Sor\u00e9e\n\n\n\nLuc is a committed and focused sales professional with outstanding knowledge of Enterprise Applications (ERP/SCM/CRM). He can drive a team to success with his incredible enthusiasm. It is always a pleasure working together with Luc on opportunities."
-    ],
+    "recommendations": [],
     "activities": [],
     "similarly_named_profiles": [],
     "articles": [],
     "groups": []
+  },
+  {
+    "public_identifier": "thiels",
+    "profile_pic_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/person/thiels/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20220922%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20220922T130241Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=efc5abf77d4d932f3db3059f7082b3f8072f8743ec3ed8f7d2698b03da60c593",
+    "background_cover_image_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/person/thiels/cover?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20220922%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20220922T130241Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b24d5fa3901a9660d28a07b2574a66540e85ce052752024e1a041c8660b7096e",
+    "first_name": "Kevin",
+    "last_name": "Thiels",
+    "full_name": "Kevin Thiels",
+    "occupation": "Solution architect at Aperta.be",
+    "headline": "Solution architect, Agile coach",
+    "summary": "Available for consultancy assignments. Contact me or via info@dazzle.be\n\nAgile coach and thinker, \nDevOps champion @ DXC Belgium\nDeveloper, \nDrupal coach.\n\nPHP, HTML, CSS, XHTML, JavaScript (incl. libs such as jQuery), AJAX and MySQL. \n\nBuilding an Artificial Intelligence for home automation in Python and Shell on my Raspberry Pi.",
+    "country": "BE",
+    "country_full_name": "Belgium",
+    "city": "Brussels Region",
+    "state": null,
+    "experiences": [
+      {
+        "starts_at": { "day": 1, "month": 2, "year": 2022 },
+        "ends_at": null,
+        "company": "Aperta.be",
+        "company_linkedin_profile_url": "https://www.linkedin.com/company/apertadotbe/",
+        "title": "Solution architect",
+        "description": "Technical Asset Manager for Drupal, Drupal coach, Agile coach, Senior Drupal developer",
+        "location": "Belgium",
+        "logo_url": "https://media-exp1.licdn.com/dms/image/C4E0BAQHIHJ5mRgBfiQ/company-logo_400_400/0/1642772628192?e=1671667200&v=beta&t=0AmlsYm8HOp-TL1yxGLXE64duTlktnrw3UD0fcHi6cM"
+      },
+      {
+        "starts_at": { "day": 1, "month": 4, "year": 2018 },
+        "ends_at": null,
+        "company": "DXC Technology",
+        "company_linkedin_profile_url": "https://www.linkedin.com/company/dxctechnology/",
+        "title": "Drupal architect/team lead, Agile coach & DevOps champion",
+        "description": null,
+        "location": "Belgium",
+        "logo_url": "https://media-exp1.licdn.com/dms/image/C4D0BAQFt7orYWPc9MQ/company-logo_400_400/0/1623288155863?e=1671667200&v=beta&t=04tp-dnddDifcAzzX9wBq3brzuvbTC7hMJstgXoyiCs"
+      },
+      {
+        "starts_at": { "day": 1, "month": 9, "year": 2016 },
+        "ends_at": null,
+        "company": "Dazzle bvba",
+        "company_linkedin_profile_url": "https://www.linkedin.com/company/dazzle-bvba/",
+        "title": "Agile Coach & Consultant / Drupal Affairs",
+        "description": "Drupal development & Agile coach\n\nEmployee at Dazzle. Consultancy assignments possible.",
+        "location": null,
+        "logo_url": "https://media-exp1.licdn.com/dms/image/C4D0BAQECVD5BQRHYdQ/company-logo_400_400/0/1519915341638?e=1671667200&v=beta&t=7sx6IBuj5QVI-rpBXhzfHF8owHe-YfmE5XZ1p5QtAcc"
+      },
+      {
+        "starts_at": { "day": 1, "month": 9, "year": 2009 },
+        "ends_at": { "day": 30, "month": 9, "year": 2016 },
+        "company": "Colruyt Group",
+        "company_linkedin_profile_url": "https://www.linkedin.com/company/colruytgroup/",
+        "title": "Technical Asset Manager Drupal",
+        "description": "Technical Asset Manager for Drupal, Drupal coach, Agile coach, Senior Drupal developer",
+        "location": null,
+        "logo_url": "https://media-exp1.licdn.com/dms/image/C560BAQG2fb0E9ZjLKg/company-logo_400_400/0/1633013107386?e=1671667200&v=beta&t=WU_AfXP_A2dFNdtNVylgs_VUNfOE-7wkwyUjZgiOnME"
+      }
+    ],
+    "education": [],
+    "languages": ["Dutch", "English", "French"],
+    "accomplishment_organisations": [],
+    "accomplishment_publications": [
+      {
+        "name": "Treasure hunters",
+        "publisher": "Kevin Thiels",
+        "published_on": { "day": 1, "month": 1, "year": 2019 },
+        "description": null,
+        "url": "https://www.kevinthiels.be/2019/03/treasure-hunters/"
+      },
+      {
+        "name": "Being the Product Owner is a full time job",
+        "publisher": "Kevin Thiels",
+        "published_on": { "day": 1, "month": 1, "year": 2019 },
+        "description": null,
+        "url": "https://www.kevinthiels.be/2019/02/being-the-product-owner-is-a-full-time-job/"
+      },
+      {
+        "name": "Waarom je als bedrijf beter voor een Agile aanpak kiest",
+        "publisher": "Dazzle",
+        "published_on": { "day": 1, "month": 1, "year": 2017 },
+        "description": null,
+        "url": "https://www.dazzle.be/nl/artikels/article/waarom-je-als-bedrijf-beter-voor-een-agile-aanpak-kiest"
+      },
+      {
+        "name": "Drupal module: Lesser Forms",
+        "publisher": "https://www.drupal.org/project/lesser_forms",
+        "published_on": { "day": 1, "month": 1, "year": 2015 },
+        "description": "A Drupal module that hides some options for less technical people that are managing content.",
+        "url": "https://www.drupal.org/project/lesser_forms"
+      }
+    ],
+    "accomplishment_honors_awards": [],
+    "accomplishment_patents": [],
+    "accomplishment_courses": [],
+    "accomplishment_projects": [
+      {
+        "starts_at": { "day": 1, "month": 7, "year": 2018 },
+        "ends_at": null,
+        "title": "Agile coach @ DXC.technology",
+        "description": null,
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 7, "year": 2018 },
+        "ends_at": null,
+        "title": "Agile coach @ Vlaamse overheid",
+        "description": null,
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 4, "year": 2018 },
+        "ends_at": null,
+        "title": "Drupal Team lead @ DXC.technology",
+        "description": null,
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 5, "year": 2017 },
+        "ends_at": null,
+        "title": "Trainingstore",
+        "description": null,
+        "url": "http://www.trainingstore.be"
+      },
+      {
+        "starts_at": { "day": 1, "month": 10, "year": 2016 },
+        "ends_at": null,
+        "title": "Distriweb (AMP)",
+        "description": null,
+        "url": "http://www.distriweb.be"
+      },
+      {
+        "starts_at": { "day": 1, "month": 9, "year": 2015 },
+        "ends_at": { "day": 30, "month": 9, "year": 2015 },
+        "title": "Drupal 8 Facets",
+        "description": "Building Drupal 8 facets together with the community.",
+        "url": "https://www.aansluitingen.be"
+      },
+      {
+        "starts_at": { "day": 1, "month": 8, "year": 2015 },
+        "ends_at": { "day": 31, "month": 8, "year": 2015 },
+        "title": "New website for Boni Selection",
+        "description": "Back-end development, Coach",
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 5, "year": 2015 },
+        "ends_at": { "day": 31, "month": 5, "year": 2015 },
+        "title": "New website for Collibri Foundation",
+        "description": "Back-end development, coaching",
+        "url": "http://www.reiskriebels.nl"
+      },
+      {
+        "starts_at": { "day": 1, "month": 5, "year": 2014 },
+        "ends_at": { "day": 31, "month": 5, "year": 2014 },
+        "title": "New website for Spar Retail",
+        "description": "Technical analyse, website building and deployments.",
+        "url": "http://www.vakantiedeals.be"
+      },
+      {
+        "starts_at": { "day": 1, "month": 1, "year": 2017 },
+        "ends_at": { "day": 28, "month": 2, "year": 2018 },
+        "title": "Aansluitingen.be",
+        "description": "Aansluitingen is a site where you can request and track all your electricity, natural gas, water, telecom and/or sewerage works when you are in need of connections for your new build or renovation.",
+        "url": "http://www.vier.be"
+      },
+      {
+        "starts_at": { "day": 1, "month": 12, "year": 2016 },
+        "ends_at": { "day": 30, "month": 4, "year": 2017 },
+        "title": "bpost",
+        "description": "Drupal architect",
+        "url": "http://www.vijf.be"
+      },
+      {
+        "starts_at": { "day": 1, "month": 2, "year": 2017 },
+        "ends_at": { "day": 31, "month": 3, "year": 2017 },
+        "title": "Reiskriebels",
+        "description": "Drupal development",
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 2, "year": 2017 },
+        "ends_at": { "day": 31, "month": 3, "year": 2017 },
+        "title": "Vakantiedeals",
+        "description": "Drupal development",
+        "url": "https://www.boniselection.be"
+      },
+      {
+        "starts_at": { "day": 1, "month": 12, "year": 2016 },
+        "ends_at": { "day": 28, "month": 2, "year": 2017 },
+        "title": "Vier.be (SBS)",
+        "description": "Maintenance & PM",
+        "url": "https://www.collibrifoundation.org"
+      },
+      {
+        "starts_at": { "day": 1, "month": 12, "year": 2016 },
+        "ends_at": { "day": 28, "month": 2, "year": 2017 },
+        "title": "Vijf.be (SBS)",
+        "description": "Maintenance, PM",
+        "url": "http://www.sparretail.be"
+      }
+    ],
+    "accomplishment_test_scores": [
+      {
+        "name": "Scrum.org: Scrum open",
+        "score": "96.7%",
+        "date_on": { "day": 1, "month": 5, "year": 2017 },
+        "description": "Scrum.org Open assessment"
+      }
+    ],
+    "volunteer_work": [],
+    "certifications": [
+      {
+        "starts_at": { "day": 1, "month": 6, "year": 2017 },
+        "ends_at": null,
+        "name": "Entrepreneurship: How To Launch A Lean Startup You Love",
+        "license_number": "UC-QKEKU9AP",
+        "display_source": "udemy.com",
+        "authority": "Udemy",
+        "url": "https://www.udemy.com/certificate/UC-QKEKU9AP/"
+      },
+      {
+        "starts_at": { "day": 1, "month": 3, "year": 2017 },
+        "ends_at": null,
+        "name": "International Agile Test Foundation",
+        "license_number": null,
+        "display_source": null,
+        "authority": "www.scrum.as",
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 3, "year": 2017 },
+        "ends_at": null,
+        "name": "International Product Owner Foundation",
+        "license_number": null,
+        "display_source": null,
+        "authority": "www.scrum.as",
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 3, "year": 2017 },
+        "ends_at": null,
+        "name": "International Scrum Master Foundation",
+        "license_number": null,
+        "display_source": null,
+        "authority": "www.scrum.as",
+        "url": null
+      },
+      {
+        "starts_at": { "day": 1, "month": 2, "year": 2017 },
+        "ends_at": null,
+        "name": "Acquia Certified Developer - Drupal 8",
+        "license_number": null,
+        "display_source": "acquia.com",
+        "authority": "Acquia",
+        "url": "https://certification.acquia.com/user/1472931"
+      },
+      {
+        "starts_at": { "day": 1, "month": 8, "year": 2015 },
+        "ends_at": null,
+        "name": "Certified Agile Coach",
+        "license_number": null,
+        "display_source": "thisagilelife.com",
+        "authority": "This Agile Life",
+        "url": "http://www.thisagilelife.com"
+      }
+    ],
+    "connections": 500,
+    "people_also_viewed": [
+      {
+        "link": "https://be.linkedin.com/in/jo-beynaerts-a02068180",
+        "name": "Jo Beynaerts",
+        "summary": "Associate Tech consultant bij DXC Technology",
+        "location": "Scherpenheuvel"
+      },
+      {
+        "link": "https://be.linkedin.com/in/dieterjeanty",
+        "name": "Dieter Jeanty",
+        "summary": "Zaakvoerder Webtica BV",
+        "location": "Kortenberg"
+      },
+      {
+        "link": "https://be.linkedin.com/in/jeroen-crabbe-b7859a76",
+        "name": "jeroen crabbe",
+        "summary": "Bids/Proposals DXC Technology, Bachelorgraad bij KU Leuven",
+        "location": "Genk"
+      },
+      {
+        "link": "https://www.linkedin.com/in/raj-prathibha",
+        "name": "Raj prathibha",
+        "summary": "PHP Developer at DXC Technology",
+        "location": "Greater Minneapolis-St. Paul Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/dieter-standaert-b6335b21",
+        "name": "Dieter Standaert",
+        "summary": "Analyst at DXC Technology",
+        "location": "Brussels Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/athina-van-doorslaer-4b678b11b",
+        "name": "Athina Van Doorslaer",
+        "summary": "Kleuterleidster + Psychologisch Consulent",
+        "location": "Brussels Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/yannick-van-keer-43086660",
+        "name": "Yannick Van Keer",
+        "summary": "System Engineer bij RGF Staffing Belgium",
+        "location": "Mechelen"
+      },
+      {
+        "link": "https://be.linkedin.com/in/floris-verswijvel-4323945",
+        "name": "Floris Verswijvel",
+        "summary": "ICT-manager bij Zuidnatie",
+        "location": "Antwerp Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/roel-vanduffel-90b7714a",
+        "name": "Roel Vanduffel",
+        "summary": "Zaakvoerder bij BBT Garage Software",
+        "location": "Antwerp Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/nilspannecoucke",
+        "name": "Nils Pannecoucke",
+        "summary": "Business Consultant at DXC Technology",
+        "location": "Brussels Region, Belgium"
+      },
+      {
+        "link": "https://be.linkedin.com/in/helenestuyck",
+        "name": "H\u00e9l\u00e8ne Stuyck",
+        "summary": "Diabeteseducator bij UZ Brussel",
+        "location": "Brussels Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/stefanie-van-hoe-1174b82",
+        "name": "Stefanie Van Hoe",
+        "summary": "Recruiting Manager",
+        "location": "Belgium"
+      },
+      {
+        "link": "https://be.linkedin.com/in/mich%C3%A8le-sempels-2345371a3",
+        "name": "Mich\u00e8le Sempels",
+        "summary": "Verkoper, administratie, model bij Be-glam",
+        "location": "Aarschot"
+      },
+      {
+        "link": "https://be.linkedin.com/in/joeri-schroyen-62378270",
+        "name": "Joeri Schroyen",
+        "summary": "functional analist at CSC",
+        "location": "Ghent Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/joaquimvl",
+        "name": "Joaquim Vlaminck",
+        "summary": "Founder @ HCommerce",
+        "location": "Bruges Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/st%C3%A9phane-coelis-a02b9095",
+        "name": "St\u00e9phane Coelis",
+        "summary": "Business analyst GIS/Product owner at DXC.Technology",
+        "location": "Antwerp"
+      },
+      {
+        "link": "https://be.linkedin.com/in/rik-peetermans",
+        "name": "Rik Peetermans",
+        "summary": "Digitaal marketer @Dazzle | Docent @Syntra Bizz | Marketing Automation, Sendinblue & Mautic | Trainer Google Analytics",
+        "location": "Antwerp Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/peter-van-hal-99326475",
+        "name": "Peter Van Hal",
+        "summary": "Projectmanager/scrummaster bij DXC Technology",
+        "location": "Antwerp Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/nckhell",
+        "name": "Nick Hellemans",
+        "summary": "Passionate about technology and innovation in healthcare | Digital care pathways | Value-Based Healthcare | Awell Health",
+        "location": "Antwerp Metropolitan Area"
+      },
+      {
+        "link": "https://be.linkedin.com/in/vladislav-sloboder-ocp-ocjp-psm-i-pspo-i-it-architec-740a6041",
+        "name": "Vladislav. Sloboder, OCP ,OCJP, PSM I, PSPO I, IT Architec",
+        "summary": "Application Owner at DXC Technology",
+        "location": "Antwerp"
+      },
+      {
+        "link": "https://www.linkedin.com/in/maui-vindevogel",
+        "name": "Maui Vindevogel",
+        "summary": "Digital & Content Marketeer | Copywriter | Gaming journalist | Music reviewer | Photographer in training",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/nickolasstefanis",
+        "name": "Nicolas Stefanis",
+        "summary": "DevOps Engineer & Drupal Developer at dazzle.be",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/lars-picke",
+        "name": "Lars Pick\u00e9",
+        "summary": "Wordpress developer bij Dazzle",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/bram-slootmans-78241b13",
+        "name": "bram slootmans",
+        "summary": "Brand, Graphic & Digital Product Designer",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/thomas-van-cleemput-9a095491",
+        "name": "Thomas Van Cleemput",
+        "summary": "Technical consultant at AE",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/russellmeakin",
+        "name": "Russell Meakin",
+        "summary": "Designer | Web Developer | Events",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/adrian-nikolov-b7281b210",
+        "name": "Adrian Nikolov",
+        "summary": "asl at DXC Technology",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/antares-advisors-12b696240",
+        "name": "Antares Advisors",
+        "summary": "Consultant chez Antares Advisors",
+        "location": null
+      },
+      {
+        "link": "https://www.linkedin.com/in/gregoirekrieg",
+        "name": "Gr\u00e9goire Krieg",
+        "summary": "Polyglot with extensive sales and consultancy experience in IT",
+        "location": null
+      }
+    ],
+    "recommendations": [
+      "Ben Van Aken\n\n\n\nI've had the pleasure to work with Kevin on one of my projects where he served as an Agile coach for our delivery team.\nHis knowledge and application of agile are on point which was a great addition to our team. He is a great person, and I wouldn't hesitate to work with him again.",
+      "Beerend Lauwers\n\n\n\nSo your company has decided to go all-in on agile! Or perhaps you've applied it to a particular project, and others are taking note of your success - they're interested in rolling it out across the shop. But you could use some help in getting it all off the ground.\n\nKevin is your guy.\n\nHe has worked in enterprises big and small, where he helped roll out the agile way of working to great acclaim. Personally, I worked with him on a project where he was brought on as a highly experienced Drupal developer, but he was absolutely invaluable in helping me learn more about how to approach a multitude of problems in an agile manner. \n\nIf you're like me, with some agile projects under my belt, Kevin is an infinite source of experience and wisdom to learn from. He always clarifies agile concepts with an anecdote or story, ensuring that you get more than the gist of it - you can actually use it right off the bat. He is happy to act as a sounding board to refine and discuss agile concepts with you and provides constructive feedback along the way. \n\nIn short, Kevin is a catalyst for accelerating the growth of budding Scrum masters, agile coaches and anyone else interested in the agile way of working and thinking.\n\nIf you're completely new to agile, Kevin is a prime candidate for starting off on the right foot. He understands it from top to bottom: from the way developers can be empowered to take agency of, responsibility for, and pride in their work, to how managers can learn to foster an agile-friendly working environment and reap the productive benefits, to communicating and collaborating with clients regularly and transparently, fostering trust and confidence in the product or service you are providing.\n\nYou want that agile quality? You want that agile velocity? \n\nKevin is your guy."
+    ],
+    "activities": [],
+    "similarly_named_profiles": [
+      {
+        "name": "Kevin Thiels",
+        "link": "https://be.linkedin.com/in/kevin-thiels-740b3898",
+        "summary": "--",
+        "location": "Belgium"
+      },
+      {
+        "name": "Kevin Thiels",
+        "link": "https://be.linkedin.com/in/kevin-thiels-7b5752a4",
+        "summary": "Aankoop bij Zuidnatie nv",
+        "location": "Antwerp Metropolitan Area"
+      },
+      {
+        "name": "Kevin Thiels",
+        "link": "https://be.linkedin.com/in/kevin-thiels-33365b143",
+        "summary": "--",
+        "location": "Belgium"
+      }
+    ],
+    "articles": [
+      {
+        "title": "WAAROM JE ALS BEDRIJF BETER VOOR EEN AGILE AANPAK KIEST",
+        "link": "https://www.linkedin.com/pulse/waarom-je-als-bedrijf-beter-voor-een-agile-aanpak-kiest-kevin-thiels",
+        "published_date": { "day": 16, "month": 1, "year": 2017 },
+        "author": "By Kevin Thiels",
+        "image_url": "https://static-exp1.licdn.com/scds/common/u/img/pic/pic_pulse_stock_article_10.jpg"
+      }
+    ],
+    "groups": []
   }
-  
+]

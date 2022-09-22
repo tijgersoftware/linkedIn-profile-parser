@@ -6,7 +6,7 @@ import rest
 import json
 #
 # simplexml should be installed
-#
+#pip install python-simplexml
 from simplexml import dumps
 from flask import Flask, make_response
 from flask_restful import Api
@@ -31,8 +31,9 @@ def output_xml(data, code, headers=None):
 #api.representations['application/json'] = output_json
 #api.representations['application/xml'] = output_xml
 
-api.add_resource(rest.Greet, '/')
+
 api.add_resource(rest.GreetName, '/<string:name>')
+api.add_resource(rest.GetProfilesListData, '/')
 
 if __name__ == "__main__":
 	app.run()
