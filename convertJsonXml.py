@@ -46,10 +46,10 @@ def createExperience(amount,data,profile,totalExperiences):
     if totalExperiences == 1:
         print('The user has only 1 experience at:'+data["company"])
         experience=ET.SubElement(experience, "item_5")
-    ET.SubElement(experience, "Afbeelding").text = str(data["logo_url"])
+    ET.SubElement(experience, "Afbeelding").text = NoneSafety(possiblyNone=data["logo_url"],returnIfNotNone=str(data["logo_url"]),returnIfNone="https://www.scmdojo.com/wp-content/themes/aapside-child/arxoft/assets/company_placeholder.png") 
     ET.SubElement(experience, "Functie").text = str(data["title"])
     ET.SubElement(experience, "Bedrijf").text = str(data["company"])
-    ET.SubElement(experience, "Locatie").text = str(data["location"])
+    ET.SubElement(experience, "Locatie").text = NoneSafety(data["location"],str(data["location"]))
     ET.SubElement(experience, "VanMaand").text = str(convertMonthNumber(data["starts_at"]["month"]))
     ET.SubElement(experience, "VanJaar").text = str(data["starts_at"]["year"])
 
@@ -87,7 +87,7 @@ def createEducation(amount,profile,data, totalDegrees):
     if totalDegrees == 1:
         opleiding=ET.SubElement(opleiding, "item_5")
     try:
-        ET.SubElement(opleiding, "Afbeelding").text = str(data["education"][amount]["logo_url"])
+        ET.SubElement(opleiding, "Afbeelding").text = NoneSafety((data["education"][amount]["logo_url"]),str(data["education"][amount]["logo_url"]),"http://studentcorner.co.uk/img/university_placeholder_image.aed66650.png")
     except:
         print("couldn't find a logo from school")
     try:
@@ -111,7 +111,10 @@ def createEducation(amount,profile,data, totalDegrees):
     except: 
         print("couldn't find the name of the school")
     try: 
-        ET.SubElement(opleiding, "Afstudeerrichting").text = str(data["education"][amount]["field_of_study"])
+        ET.SubElement(opleiding, "Afstudeerrichting").text = NoneSafety(possiblyNone= data["education"][amount]["field_of_study"], returnIfNotNone= str(data["education"][amount]["field_of_study"]), returnIfNone=NoneSafety(possiblyNone=data["education"][amount]["degree_name"] , returnIfNotNone=str(data["education"][amount]["degree_name"]) , returnIfNone= "") ) 
+            
+            
+            
     except: 
         print("couldn't find the name of the course")
     # try:
@@ -156,7 +159,7 @@ def createProfile(data,root,linkedInUrl):
         # ET.SubElement(AlgemeneInformatie, "straatPlusNummer").text = "test straat"
         # ET.SubElement(AlgemeneInformatie, "postcode").text = "test postcode "
         try:
-            ET.SubElement(AlgemeneInformatie, "stad").text = str(data["city"])
+            ET.SubElement(AlgemeneInformatie, "stad").text = NoneSafety(data["city"],str(data["city"]))
         except: 
             print('failed to find the city name for: '+ linkedInUrl)
         try:
@@ -173,7 +176,7 @@ def createProfile(data,root,linkedInUrl):
         except:
             print('failed to find the current position for: '+ linkedInUrl)
         try:
-            ET.SubElement(AlgemeneInformatie, "summary").text = data["summary"]
+            ET.SubElement(AlgemeneInformatie, "summary").text = NoneSafety(data["summary"],str(data["summary"]))
         except:
             print("couldn't fetch the about me")
         
