@@ -37,8 +37,15 @@ def ExperienceAnalyzer(jsonArray):
             #print("The current is "+currentPosition)
     return {"currentPosition":currentPosition}
 
-def createExperience(amount,data,profile):
+def createExperience(amount,data,profile,totalExperiences):
     experience=ET.SubElement(profile, "experience")
+        #
+    # wordpress exception for 1 record of repeater field
+    #
+
+    if totalExperiences == 1:
+        print('The user has only 1 experience at:'+data["company"])
+        experience=ET.SubElement(experience, "item_5")
     ET.SubElement(experience, "Afbeelding").text = str(data["logo_url"])
     ET.SubElement(experience, "Functie").text = str(data["title"])
     ET.SubElement(experience, "Bedrijf").text = str(data["company"])
@@ -46,24 +53,39 @@ def createExperience(amount,data,profile):
     ET.SubElement(experience, "VanMaand").text = str(convertMonthNumber(data["starts_at"]["month"]))
     ET.SubElement(experience, "VanJaar").text = str(data["starts_at"]["year"])
 
+    
+
     if data["ends_at"] == None:
         #print('until present')
-        ET.SubElement(experience, "TotMaand").text = "Present"
-        ET.SubElement(experience, "TotJaar").text = ""
+        ET.SubElement(experience, "TotMaand").text = "January"
+        ET.SubElement(experience, "TotJaar").text = "heden"
     else:
         ET.SubElement(experience, "TotMaand").text = str(convertMonthNumber(data["ends_at"]["month"]))
         ET.SubElement(experience, "TotJaar").text = str(data["ends_at"]["year"])
-    ET.SubElement(experience, "Beschrijvingsveld").text = str(data["description"])
+    ET.SubElement(experience, "Beschrijvingsveld").text = NoneSafety(possiblyNone=data["description"],returnIfNotNone=str(data["description"]))
 
+def NoneSafety(possiblyNone,returnIfNotNone,returnIfNone=""):
+    if possiblyNone == None:
+        return returnIfNone
+    else:
+        return returnIfNotNone
+
+    
 def createAllExperiences(data,profile):
     experience=ET.SubElement(profile, "experiences")
     for x in range(0,len(data["experiences"])):
         
-        createExperience(amount=str(x),data=data["experiences"][x],profile=experience)
+        createExperience(amount=str(x),data=data["experiences"][x],profile=experience,totalExperiences=len(data["experiences"]))
 
 
-def createEducation(amount,profile,data):
+def createEducation(amount,profile,data, totalDegrees):
     opleiding=ET.SubElement(profile, "opleiding")
+    #
+    # wordpress exception for 1 record of repeater field
+    #
+
+    if totalDegrees == 1:
+        opleiding=ET.SubElement(opleiding, "item_5")
     try:
         ET.SubElement(opleiding, "Afbeelding").text = str(data["education"][amount]["logo_url"])
     except:
@@ -92,12 +114,23 @@ def createEducation(amount,profile,data):
         ET.SubElement(opleiding, "Afstudeerrichting").text = str(data["education"][amount]["field_of_study"])
     except: 
         print("couldn't find the name of the course")
-    # ET.SubElement(opleiding, "BehaaldNiveau").text = str(data["education"][amount]["degree_name"])
+    # try:
+    #     ET.SubElement(opleiding, "BehaaldNiveau").text = str(data["education"][amount]["degree_name"])
+    # except: 
+    #     print("Couldn't determine the level of the degree")
+
+# def determineLevelDegree(degreeName):
+#     print('determining the level of the degree')
+#     x = ('Secundair onderwijs', 'Bachelor', 'Master', "PHD", "Degree not achieved")
+#     y = enumerate(x)
+
+#     print(list(y))
+    
 def createAllEducations(profile,data):
    
     for x in range(0,len(data["education"])):
 
-        createEducation(amount=x,profile=profile,data=data)
+        createEducation(amount=x,profile=profile,data=data,totalDegrees = len(data["education"]))
 
 
 def createProfile(data,root,linkedInUrl):
@@ -140,6 +173,11 @@ def createProfile(data,root,linkedInUrl):
         except:
             print('failed to find the current position for: '+ linkedInUrl)
         try:
+            ET.SubElement(AlgemeneInformatie, "summary").text = data["summary"]
+        except:
+            print("couldn't fetch the about me")
+        
+        try:
             ET.SubElement(AlgemeneInformatie, "LinkedinUrl").text = linkedInUrl
         except:
             print('failed to find the linkedInUrl for: '+ linkedInUrl)
@@ -154,6 +192,7 @@ def createProfile(data,root,linkedInUrl):
         except:
             print('failed to create the experiences for: '+ linkedInUrl)
         try: 
+
             createAllEducations(profile=Opleiding,data=data)
         except: 
             print('failed to create the education listings for: '+ linkedInUrl)
@@ -162,6 +201,7 @@ def createProfile(data,root,linkedInUrl):
 def createAllProfiles(root,linkedInUrls):
     if testMode == True:
         
+
         if dummyData == True:
             print('using dummy data')
             with open("dummy.json", "r") as json_file:
@@ -301,6 +341,6 @@ def serveProfileDataXml(linkedInUrls):
 def main():
     linkedInUrls= linkedInUrls=["www.linkedin.com/in/panagiotis-m-ab5b6a2a","https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/gkyriazopoulos/","https://www.linkedin.com/in/david-bash-0286b357/","https://www.linkedin.com/in/kostas-kourakis-91b7891a1/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/nickolasstefanis/","https://www.linkedin.com/in/georgia-afioni-80028851/","https://gr.linkedin.com/in/george-papadas-418480190"]
     return serveProfileDataXml(linkedInUrls)
-main()
+#main()
 
 # ngrok http 5000
