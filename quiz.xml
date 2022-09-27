@@ -1,1 +1,12 @@
-<profilesList><profile><AlgemeneInformatie><voornaam>Luc</voornaam><naam>Claeys</naam></AlgemeneInformatie></profile></profilesList>
+<profilesList>
+	<profile>
+		<AlgemeneInformatie>
+			<voornaam>
+				Luc
+			</voornaam>
+			<naam>
+				Claeys
+			</naam>
+		</AlgemeneInformatie>
+	</profile>
+</profilesList>

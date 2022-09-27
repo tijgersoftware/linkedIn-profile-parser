@@ -1,8 +1,9 @@
-# Program to read JSON file 
+# Program to read JSON file
 # and generate its XML file
-   
+
 # Importing json module and xml
 # module provided by python
+from distutils.log import error
 import json as JS
 from this import d
 import xml.etree.ElementTree as ET
@@ -10,327 +11,446 @@ import requests
 import calendar
 import sys
 import XmlConfig
-testMode=True
-dummyData= True
+import random
+from translate import Translator
+#
+# When dummy data is set to true the testmode should be set to true as well.
+# This will fetch the data from dummy.json and will not make a payable api request
+#
+
+testMode = True
+dummyData = True
+devApi = False
+#
+#  Available languages:
+    #    https://en.wikipedia.org/wiki/ISO_639-1
+    #    https://nl.wikipedia.org/wiki/Lijst_van_ISO_639-codes  
+    #    Examples: (e.g. en, ja, ko, pt, zh, zh-TW, ...)
+# resource: https://pypi.org/project/translate/
+
+#
+languages= ["nl","el"]
+
 #
 # test george papadas
 #
+
+#
+# returns random valid  api keys with 10 free credits
+#
+countRequest = 0
+countKeys = 0
+#
+# Get the api key to fetch the linked profiles
+#
+
+
+def devApiKey(amountLinkedInUrls):
+    print('get the api key')
+    global countKeys
+    global countRequest
+    if countRequest == 0:
+        countKeys = 0
+    elif (countRequest % amountLinkedInUrls == 0):
+        countKeys += 1
+
+    countRequest += 1
+
+    print("until api key " + str(countKeys) + " is used")
+    apiKeys = ["o-8NHyw3FPAG4vz2hIrozQ", "1B2vrvUuQbWbBxn30U7ZBw"]
+    print("countKeys" + str(countKeys) + "apiKeys" + str(len(apiKeys)))
+    try:
+        a = countKeys
+        b = len(apiKeys)
+        if b > a:
+            print("b is greater than a")
+            return apiKeys[countKeys]
+    except:
+        print('failed')
+    else:
+        return apiKeys[0]
+
+
+def getApiKey():
+    if devApi == True:
+        return devApiKey()
+    else:
+        return "jfjfk"
+#
+# convert a number to the name of a month
+#
+
+
 def convertMonthNumber(numberMonth):
     return calendar.month_name[numberMonth]
-    
+
+#
+# loops trough the experiences and returns the current experience
+# can be used when other information needs to be fetched from experiences
+#
+
 
 def ExperienceAnalyzer(jsonArray):
-    currentPosition=""
-    currentPositionIndex=0
-    for x in range(0,len(jsonArray)):
+    currentPosition = ""
+    currentPositionIndex = 0
+    for x in range(0, len(jsonArray)):
         if jsonArray[x]["ends_at"] == None:
 
             #print("The present experience found")
-           
-            if (currentPositionIndex>0):
-                currentPositionIndex+=1
 
-                currentPosition=currentPosition+", "+jsonArray[x]["title"].replace(".", "")
+            if (currentPositionIndex > 0):
+                currentPositionIndex += 1
+
+                currentPosition = currentPosition+", " + \
+                    jsonArray[x]["title"].replace(".", "")
             else:
-                currentPositionIndex+=1
-                currentPosition=currentPosition+jsonArray[x]["title"].replace(".", "")
+                currentPositionIndex += 1
+                currentPosition = currentPosition + \
+                    jsonArray[x]["title"].replace(".", "")
             #print("The current is "+currentPosition)
-    return {"currentPosition":currentPosition}
+    return {"currentPosition": currentPosition}
 
-def createExperience(amount,data,profile,totalExperiences):
-    experience=ET.SubElement(profile, "experience")
-        #
+#
+#
+
+
+def createExperience(amount, data, profile, totalExperiences):
+    experience = ET.SubElement(profile, "experience")
+    #
     # wordpress exception for 1 record of repeater field
     #
 
     if totalExperiences == 1:
         print('The user has only 1 experience at:'+data["company"])
-        experience=ET.SubElement(experience, "item_5")
-    ET.SubElement(experience, "Afbeelding").text = NoneSafety(possiblyNone=data["logo_url"],returnIfNotNone=str(data["logo_url"]),returnIfNone="https://www.scmdojo.com/wp-content/themes/aapside-child/arxoft/assets/company_placeholder.png") 
+        experience = ET.SubElement(experience, "item_5")
+    ET.SubElement(experience, "Afbeelding").text = NoneSafety(possiblyNone=data["logo_url"], returnIfNotNone=str(
+        data["logo_url"]), returnIfNone="https://www.scmdojo.com/wp-content/themes/aapside-child/arxoft/assets/company_placeholder.png")
     ET.SubElement(experience, "Functie").text = str(data["title"])
     ET.SubElement(experience, "Bedrijf").text = str(data["company"])
-    ET.SubElement(experience, "Locatie").text = NoneSafety(data["location"],str(data["location"]))
-    ET.SubElement(experience, "VanMaand").text = str(convertMonthNumber(data["starts_at"]["month"]))
+    ET.SubElement(experience, "Locatie").text = NoneSafety(
+        data["location"], str(data["location"]))
+    ET.SubElement(experience, "VanMaand").text = str(
+        convertMonthNumber(data["starts_at"]["month"]))
     ET.SubElement(experience, "VanJaar").text = str(data["starts_at"]["year"])
-
-    
 
     if data["ends_at"] == None:
         #print('until present')
         ET.SubElement(experience, "TotMaand").text = "January"
         ET.SubElement(experience, "TotJaar").text = "heden"
     else:
-        ET.SubElement(experience, "TotMaand").text = str(convertMonthNumber(data["ends_at"]["month"]))
-        ET.SubElement(experience, "TotJaar").text = str(data["ends_at"]["year"])
-    ET.SubElement(experience, "Beschrijvingsveld").text = NoneSafety(possiblyNone=data["description"],returnIfNotNone=str(data["description"]))
+        ET.SubElement(experience, "TotMaand").text = str(
+            convertMonthNumber(data["ends_at"]["month"]))
+        ET.SubElement(experience, "TotJaar").text = str(
+            data["ends_at"]["year"])
+    ET.SubElement(experience, "Beschrijvingsveld").text = NoneSafety(
+        possiblyNone=data["description"], returnIfNotNone=str(data["description"]))
 
-def NoneSafety(possiblyNone,returnIfNotNone,returnIfNone=""):
+#
+# NoneSafety so None will not be displayed but another return time when there is no value in the variable
+#
+
+
+def NoneSafety(possiblyNone, returnIfNotNone, returnIfNone=""):
     if possiblyNone == None:
         return returnIfNone
     else:
         return returnIfNotNone
 
-    
-def createAllExperiences(data,profile):
-    experience=ET.SubElement(profile, "experiences")
-    for x in range(0,len(data["experiences"])):
-        
-        createExperience(amount=str(x),data=data["experiences"][x],profile=experience,totalExperiences=len(data["experiences"]))
+#
+# loops over array of experiences
+#
 
 
-def createEducation(amount,profile,data, totalDegrees):
-    opleiding=ET.SubElement(profile, "opleiding")
+def createAllExperiences(data, profile):
+    experience = ET.SubElement(profile, "experiences")
+    for x in range(0, len(data["experiences"])):
+
+        createExperience(amount=str(
+            x), data=data["experiences"][x], profile=experience, totalExperiences=len(data["experiences"]))
+
+
+def createEducation(amount, profile, data, totalDegrees):
+    opleiding = ET.SubElement(profile, "opleiding")
     #
     # wordpress exception for 1 record of repeater field
     #
 
     if totalDegrees == 1:
-        opleiding=ET.SubElement(opleiding, "item_5")
+        opleiding = ET.SubElement(opleiding, "item_5")
     try:
-        ET.SubElement(opleiding, "Afbeelding").text = NoneSafety((data["education"][amount]["logo_url"]),str(data["education"][amount]["logo_url"]),"http://studentcorner.co.uk/img/university_placeholder_image.aed66650.png")
+        ET.SubElement(opleiding, "Afbeelding").text = NoneSafety((data["education"][amount]["logo_url"]), str(
+            data["education"][amount]["logo_url"]), "http://studentcorner.co.uk/img/university_placeholder_image.aed66650.png")
     except:
         print("couldn't find a logo from school")
     try:
-        ET.SubElement(opleiding, "Vanmaand").text = str(convertMonthNumber(data["education"][amount]["starts_at"]["month"]))
-    except: 
+        ET.SubElement(opleiding, "Vanmaand").text = str(
+            convertMonthNumber(data["education"][amount]["starts_at"]["month"]))
+    except:
         print("couldn't find the month where the course started")
-    try: 
-        ET.SubElement(opleiding, "VanJaar").text = str(data["education"][amount]["starts_at"]["year"])
+    try:
+        ET.SubElement(opleiding, "VanJaar").text = str(
+            data["education"][amount]["starts_at"]["year"])
     except:
         print("couldn't find the year where the course started")
-    try: 
-        ET.SubElement(opleiding, "Totmaand").text = str(convertMonthNumber(data["education"][amount]["ends_at"]["month"]))
-    except: 
+    try:
+        ET.SubElement(opleiding, "Totmaand").text = str(
+            convertMonthNumber(data["education"][amount]["ends_at"]["month"]))
+    except:
         print("couldn't find the month where the course ended")
     try:
-        ET.SubElement(opleiding, "TotJaar").text = str(data["education"][amount]["ends_at"]["year"])
-    except: 
+        ET.SubElement(opleiding, "TotJaar").text = str(
+            data["education"][amount]["ends_at"]["year"])
+    except:
         print("couldn't find the year where the course ended")
     try:
-        ET.SubElement(opleiding, "School").text = str(data["education"][amount]["school"])
-    except: 
+        ET.SubElement(opleiding, "School").text = str(
+            data["education"][amount]["school"])
+    except:
         print("couldn't find the name of the school")
-    try: 
-        ET.SubElement(opleiding, "Afstudeerrichting").text = NoneSafety(possiblyNone= data["education"][amount]["field_of_study"], returnIfNotNone= str(data["education"][amount]["field_of_study"]), returnIfNone=NoneSafety(possiblyNone=data["education"][amount]["degree_name"] , returnIfNotNone=str(data["education"][amount]["degree_name"]) , returnIfNone= "") ) 
-            
-            
-            
-    except: 
+    try:
+        ET.SubElement(opleiding, "Afstudeerrichting").text = NoneSafety(possiblyNone=data["education"][amount]["field_of_study"], returnIfNotNone=str(
+            data["education"][amount]["field_of_study"]), returnIfNone=NoneSafety(possiblyNone=data["education"][amount]["degree_name"], returnIfNotNone=str(data["education"][amount]["degree_name"]), returnIfNone=""))
+
+    except:
         print("couldn't find the name of the course")
-    # try:
-    #     ET.SubElement(opleiding, "BehaaldNiveau").text = str(data["education"][amount]["degree_name"])
-    # except: 
-    #     print("Couldn't determine the level of the degree")
+    try:
+        ET.SubElement(opleiding, "niveau").text = findLevelEducation(data["education"][amount]["degree_name"])    
+    except: 
+        print('couldn\'t find the level of education')
 
-# def determineLevelDegree(degreeName):
-#     print('determining the level of the degree')
-#     x = ('Secundair onderwijs', 'Bachelor', 'Master', "PHD", "Degree not achieved")
-#     y = enumerate(x)
+def findLevelEducation(degree_name):
+    educationLevel= {
+0:"Attest / Certificate",
+1:"Secundair onderwijs",
+2:"Bachelor",
+3:"Master",
+4:"PHD",
+}
+    degree_name=degree_name.lower()
+    if "certificate" in degree_name or "certification" in degree_name:
+        return educationLevel[0]
+    elif 'high school' in degree_name :
+        return educationLevel[1]
+    elif 'bachelor' in degree_name:
+        return educationLevel[2]
+    elif 'master' in degree_name:
+        return educationLevel[3]
 
-#     print(list(y))
-    
-def createAllEducations(profile,data):
-   
-    for x in range(0,len(data["education"])):
+    elif 'phd' in degree_name:
+        return educationLevel[4]
+    elif 'associate' in degree_name:
+        return 'bachelor'
+    else:
+        translator= Translator(to_lang="en")
+        translation = translator.translate(degree_name)
+        if "certificate" in translation:
+            return educationLevel[1]
+        elif 'high school' in translation :
+            return educationLevel[1]
+        elif 'bachelor' in translation:
+            return educationLevel[2]
+        elif 'master' in translation:
+            return educationLevel[3]
 
-        createEducation(amount=x,profile=profile,data=data,totalDegrees = len(data["education"]))
+        elif 'phd' in translation:
+            return educationLevel[4]
+        elif 'associate' in translation:
+            return 'bachelor'
+        else: return ""
 
+def createAllEducations(profile, data):
 
-def createProfile(data,root,linkedInUrl):
-        try:
-            experienceAnalyzer=ExperienceAnalyzer(data["experiences"])
-        except:
-            print("failed to analyze the experiences")
-        profile = ET.SubElement(root, "profile")
-        AlgemeneInformatie = ET.SubElement(profile, "AlgemeneInformatie")
-        Opleiding=ET.SubElement(profile, "educations")
-        try:
-            ET.SubElement(AlgemeneInformatie, "voornaam").text = str(data["first_name"])
-        except:
-            print('failed to find first name for: '+ linkedInUrl)
-        try:
-            ET.SubElement(AlgemeneInformatie, "naam").text = str(data["last_name"])
-        except: 
-            print('failed to find the last name for: '+ linkedInUrl)
-        try:
-            ET.SubElement(AlgemeneInformatie, "email").text = str(data["first_name"])+"."+str(data["last_name"])+"@aperta.be"
-        except:
-            print('failed to construct the email for: '+ linkedInUrl)
-        # ET.SubElement(AlgemeneInformatie, "straatPlusNummer").text = "test straat"
-        # ET.SubElement(AlgemeneInformatie, "postcode").text = "test postcode "
-        try:
-            ET.SubElement(AlgemeneInformatie, "stad").text = NoneSafety(data["city"],str(data["city"]))
-        except: 
-            print('failed to find the city name for: '+ linkedInUrl)
-        try:
-            ET.SubElement(AlgemeneInformatie, "land").text = str(data["country_full_name"])
-        except:
-            print('failed to find the country full name for: '+ linkedInUrl)
-        # ET.SubElement(AlgemeneInformatie, "land").text = str("+32489000000")  
-        # ET.SubElement(AlgemeneInformatie, "Nationaliteit").text = str("nationaliteit not provided")
-        # manueel moet gebeuren
-        # ET.SubElement(AlgemeneInformatie, "Geboortedag").text = str("not provided")
-        # ET.SubElement(AlgemeneInformatie, "Rijbewijs").text = str("not provided")
-        try:
-            ET.SubElement(AlgemeneInformatie, "Huidigefunctie").text = experienceAnalyzer["currentPosition"]
-        except:
-            print('failed to find the current position for: '+ linkedInUrl)
-        try:
-            ET.SubElement(AlgemeneInformatie, "summary").text = NoneSafety(data["summary"],str(data["summary"]))
-        except:
-            print("couldn't fetch the about me")
-        
-        try:
-            ET.SubElement(AlgemeneInformatie, "LinkedinUrl").text = linkedInUrl
-        except:
-            print('failed to find the linkedInUrl for: '+ linkedInUrl)
-        try:
-            ET.SubElement(AlgemeneInformatie, "profile_pic_url").text = data["profile_pic_url"]
-        except: 
-            print('failed to find the profile picture for: '+ linkedInUrl)
-        
-        #profile_pic_url
-        try:
-            createAllExperiences(data=data,profile=profile)
-        except:
-            print('failed to create the experiences for: '+ linkedInUrl)
-        try: 
+    for x in range(0, len(data["education"])):
 
-            createAllEducations(profile=Opleiding,data=data)
-        except: 
-            print('failed to create the education listings for: '+ linkedInUrl)
+        createEducation(amount=x, profile=profile, data=data,
+                        totalDegrees=len(data["education"]))
 
 
-def createAllProfiles(root,linkedInUrls):
+def createProfile(data, root, linkedInUrl):
+    try:
+        experienceAnalyzer = ExperienceAnalyzer(data["experiences"])
+    except:
+        print("failed to analyze the experiences")
+    profile = ET.SubElement(root, "profile")
+    AlgemeneInformatie = ET.SubElement(profile, "AlgemeneInformatie")
+    Opleiding = ET.SubElement(profile, "educations")
+    try:
+        ET.SubElement(AlgemeneInformatie, "voornaam").text = str(
+            data["first_name"])
+    except:
+        print('failed to find first name for: ' + linkedInUrl)
+    try:
+        ET.SubElement(AlgemeneInformatie, "naam").text = str(data["last_name"])
+    except:
+        print('failed to find the last name for: ' + linkedInUrl)
+    try:
+        ET.SubElement(AlgemeneInformatie, "email").text = str(
+            data["first_name"])+"."+str(data["last_name"])+"@aperta.be"
+    except:
+        print('failed to construct the email for: ' + linkedInUrl)
+    # ET.SubElement(AlgemeneInformatie, "straatPlusNummer").text = "test straat"
+    # ET.SubElement(AlgemeneInformatie, "postcode").text = "test postcode "
+    try:
+        ET.SubElement(AlgemeneInformatie, "stad").text = NoneSafety(
+            data["city"], str(data["city"]))
+    except:
+        print('failed to find the city name for: ' + linkedInUrl)
+    try:
+        ET.SubElement(AlgemeneInformatie, "land").text = str(
+            data["country_full_name"])
+    except:
+        print('failed to find the country full name for: ' + linkedInUrl)
+    # ET.SubElement(AlgemeneInformatie, "land").text = str("+32489000000")
+    # ET.SubElement(AlgemeneInformatie, "Nationaliteit").text = str("nationaliteit not provided")
+    # manueel moet gebeuren
+    # ET.SubElement(AlgemeneInformatie, "Geboortedag").text = str("not provided")
+    # ET.SubElement(AlgemeneInformatie, "Rijbewijs").text = str("not provided")
+    try:
+        ET.SubElement(AlgemeneInformatie,
+                      "Huidigefunctie").text = experienceAnalyzer["currentPosition"]
+    except:
+        print('failed to find the current position for: ' + linkedInUrl)
+    try:
+        ET.SubElement(AlgemeneInformatie, "summary").text = NoneSafety(
+            data["summary"], str(data["summary"]))
+    except:
+        print("couldn't fetch the about me")
+
+    try:
+        ET.SubElement(AlgemeneInformatie, "LinkedinUrl").text = linkedInUrl
+    except:
+        print('failed to find the linkedInUrl for: ' + linkedInUrl)
+    try:
+        ET.SubElement(AlgemeneInformatie,
+                      "profile_pic_url").text = data["profile_pic_url"]
+    except:
+        print('failed to find the profile picture for: ' + linkedInUrl)
+
+    try:
+        createAllExperiences(data=data, profile=profile)
+    except:
+        print('failed to create the experiences for: ' + linkedInUrl)
+    try:
+
+        createAllEducations(profile=Opleiding, data=data)
+    except:
+        print('failed to create the education listings for: ' + linkedInUrl)
+
+
+def createAllProfiles(root, linkedInUrls):
     if testMode == True:
-        
 
         if dummyData == True:
             print('using dummy data')
             with open("dummy.json", "r") as json_file:
                 dataArr = JS.load(json_file)
-                
-   
-        
 
         else:
-            dataArr=getDataArray(linkedInUrls)
+            dataArr = getDataArray(linkedInUrls)
     else:
-        #linkedInUrls=["https://www.linkedin.com/in/lucclaeys/","www.linkedin.com/in/panagiotis-m-ab5b6a2a","https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/gkyriazopoulos/","https://www.linkedin.com/in/david-bash-0286b357/","https://www.linkedin.com/in/kostas-kourakis-91b7891a1/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/nickolasstefanis/","https://www.linkedin.com/in/georgia-afioni-80028851/","https://gr.linkedin.com/in/george-papadas-418480190"]
-        dataArr=getDataArray(linkedInUrls)
+        # linkedInUrls=["https://www.linkedin.com/in/lucclaeys/","www.linkedin.com/in/panagiotis-m-ab5b6a2a","https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/gkyriazopoulos/","https://www.linkedin.com/in/david-bash-0286b357/","https://www.linkedin.com/in/kostas-kourakis-91b7891a1/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/nickolasstefanis/","https://www.linkedin.com/in/georgia-afioni-80028851/","https://gr.linkedin.com/in/george-papadas-418480190"]
+        dataArr = getDataArray(linkedInUrls)
 
-    err=False
-    
-    #for x in range (0,len(dataArr)):
+    err = False
 
-    print( 'the length og data ar'+str(len(dataArr))+ 'the length of linked in URL'+str(len(linkedInUrls)))
+    # for x in range (0,len(dataArr)):
+
+    print('the length og data ar'+str(len(dataArr)) +
+          'the length of linked in URL'+str(len(linkedInUrls)))
     if len(dataArr) == len(linkedInUrls):
         print('checking if the code fetched all required profiles')
-        for x in range (0,len(dataArr)):
+        for x in range(0, len(dataArr)):
             try:
                 if dummyData == True:
-                    #print('loading json')
 
                     data = dataArr[x]
-           
+
                 else:
-                    data=JS.loads(dataArr[x])
-                
-                
-                createProfile(data=data,root=root,linkedInUrl=linkedInUrls[x])
-            except Exception as e: 
+                    data = JS.loads(dataArr[x])
+
+                createProfile(data=data, root=root,
+                              linkedInUrl=linkedInUrls[x])
+            except Exception as e:
                 print("creating profile failed"+linkedInUrls[x])
-    
+
                 try:
-                    if JS.loads(dataArr[x])["code"]==403:
+                    if JS.loads(dataArr[x])["code"] == 403:
                         print('Not enough credits, please top up')
-                        err=True
+                        err = True
                 except:
                     print('error: failed to create profiles create a bug report!')
-                    err=True
+                    print(e)
+                    err = True
 
-                    
     else:
         print('error: failed to create profiles create a bug report!')
-        err=True
-    return {"error":err, "dataArr":dataArr}
-def getData(url):
+        err = True
+    return {"error": err, "dataArr": dataArr}
 
+
+def getData(url, LinkedInUrlsAmount):
+    print('getting the data')
     api_endpoint = 'https://nubela.co/proxycurl/api/v2/linkedin'
     linkedin_profile_url = url
-    api_key = 'ULjbgf6nk9wQPap-1bj0_A'
+    print('get api')
+    api_key = devApiKey(amountLinkedInUrls=LinkedInUrlsAmount)
+    print('api ket is ' + api_key)
     header_dic = {'Authorization': 'Bearer ' + api_key}
 
     response = requests.get(api_endpoint,
-                        params={'url': linkedin_profile_url},
-                        headers=header_dic)
+                            params={'url': linkedin_profile_url},
+                            headers=header_dic)
+    print(response)
     return response
-def getDataArray(LinkedInUrls):
-    dataArr=[]
-    print("get the array of data")
 
-    for x in range(0,len(LinkedInUrls)):
-   
+
+def getDataArray(LinkedInUrls):
+    dataArr = []
+    print(LinkedInUrls)
+
+    for x in range(0, len(LinkedInUrls)):
+
         try:
-            dataArr.append(getData(url=LinkedInUrls[x]).content)
+            print('try' + str(len(LinkedInUrls)))
+            dataArr.append(
+                getData(url=LinkedInUrls[x], LinkedInUrlsAmount=len(LinkedInUrls)).content)
             print('fetching url')
             print(LinkedInUrls[x])
         except:
             print('adding profile with url: '+LinkedInUrls[x]+' failed')
     return dataArr
-    
 
-def createDummyData(linkedInUrls,file):
-    dataArrBytes= getDataArray(linkedInUrls)
-    #dataArrJson= dataArrJson
-    #dataArrBytes= [b'{"public_identifier": "panagiotis-m-ab5b6a2a", "profile_pic_url": null, "background_cover_image_url": null, "first_name": "Panagiotis", "last_name": "M.", "full_name": "Panagiotis M.", "occupation": "Drupal Developer at E-Sepia Web Innovation", "headline": "Drupal Developer at E-Sepia Web Innovation", "summary": null, "country": "GR", "country_full_name": "Greece", "city": null, "state": null, "experiences": [{"starts_at": {"day": 1, "month": 11, "year": 2014}, "ends_at": null, "company": "E-Sepia Web Innovation", "company_linkedin_profile_url": "https://www.linkedin.com/company/e-sepia/", "title": "Drupal Developer", "description": null, "location": "Athens, Greece", "logo_url": "https://media-exp1.licdn.com/dms/image/C560BAQHvShKRtLln3A/company-logo_400_400/0/1537741745962?e=1671667200&v=beta&t=sYCxWSrwt15K6JNVk07koiMTg9-NF6l_FDxaVk0GMzQ"}, {"starts_at": {"day": 1, "month": 2, "year": 2013}, "ends_at": {"day": 30, "month": 6, "year": 2014}, "company": "Netstudio", "company_linkedin_profile_url": "https://www.linkedin.com/company/netstudio/", "title": "Drupal Developer", "description": null, "location": "Athens, Greece", "logo_url": "https://media-exp1.licdn.com/dms/image/C4E0BAQHRwU1pvej0cA/company-logo_400_400/0/1519892770508?e=1671667200&v=beta&t=FZ8BYxKrj8CnsQKuwnar56LyYBbotMPASwsBuv-BBJI"}, {"starts_at": {"day": 1, "month": 5, "year": 2010}, "ends_at": {"day": 28, "month": 2, "year": 2013}, "company": "Avalon Web and Media", "company_linkedin_profile_url": null, "title": "Drupal Developer", "description": null, "location": "Athens, Greece", "logo_url": null}], "education": [{"starts_at": {"day": 1, "month": 1, "year": 2004}, "ends_at": {"day": 31, "month": 12, "year": 2009}, "field_of_study": "Computer Science", "degree_name": "University Degree", "school": "Technologiko Ekpaideutiko Idrima, Athinas", "school_linkedin_profile_url": null, "description": null, "logo_url": "https://media-exp1.licdn.com/dms/image/C4E0BAQG407FrmmS-rA/company-logo_400_400/0/1519866782423?e=1671667200&v=beta&t=aMlqsxu7KE-Gr_rAwDHrwqfdkV5ikZ2P_BLLNLbM644"}], "languages": ["English", "French", "Greek"], "accomplishment_organisations": [], "accomplishment_publications": [], "accomplishment_honors_awards": [], "accomplishment_patents": [], "accomplishment_courses": [], "accomplishment_projects": [], "accomplishment_test_scores": [], "volunteer_work": [], "certifications": [], "connections": null, "people_also_viewed": [], "recommendations": [], "activities": [], "similarly_named_profiles": [], "articles": [], "groups": []}']
-    dataArrJson=[]
+
+def createDummyData(linkedInUrls, file):
+    dataArrBytes = getDataArray(linkedInUrls)
+    dataArrJson = []
     for x in range(0, len(dataArrBytes)):
-        dataJson=JS.loads(dataArrBytes[x].decode('utf-8'))
+        dataJson = JS.loads(dataArrBytes[x].decode('utf-8'))
         dataArrJson.append(dataJson)
-    
-    print('the data returned is')
-    print(dataArrJson)
-    
-    
+
     with open(file, "w") as outfile:
         JS.dump(dataArrJson, outfile)
 
 
-
-
-
-
-# Opening JSON file in read mode
-
-#with open("dummy.json", "r") as json_file:
-   
-    # loading json file data 
-    # to variable data
-    #data = JS.load(json_file)
-# data = JS.loads(getData("https://www.linkedin.com/in/lucclaeys/").content)
-# print(data)
 def serveProfileDataXml(linkedInUrls):
     root = ET.Element("profilesList")
-    allProfiles=ET.SubElement(root, "ProfilesAperta")
-    response= createAllProfiles(root=allProfiles,linkedInUrls=linkedInUrls)
+    allProfiles = ET.SubElement(root, "ProfilesAperta")
+    response = createAllProfiles(root=allProfiles, linkedInUrls=linkedInUrls)
     if response["error"] == False:
         tree = ET.ElementTree(root)
-        #
-        # TODO parse the data to the api use the dummy data for this
-        #
-        # Writing the xml to output file
+
         tree.write("profileList.xml")
-        
-        #root = tree.getroot()
+
         xmldict = XmlConfig.XmlDictConfig(root)
 
-        return  xmldict
-
+        return xmldict
 
     else:
         print('not updating because of error. Problem needs to be reported')
 
+#
+# use this function to recreate the dummy data in the json file
+#
 
 # createDummyData(file = "dummy.json",
 # # # linkedInUrls=["www.linkedin.com/in/panagiotis-m-ab5b6a2a"]
@@ -342,8 +462,8 @@ def serveProfileDataXml(linkedInUrls):
 
 
 def main():
-    linkedInUrls= linkedInUrls=["www.linkedin.com/in/panagiotis-m-ab5b6a2a","https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/gkyriazopoulos/","https://www.linkedin.com/in/david-bash-0286b357/","https://www.linkedin.com/in/kostas-kourakis-91b7891a1/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/nickolasstefanis/","https://www.linkedin.com/in/georgia-afioni-80028851/","https://gr.linkedin.com/in/george-papadas-418480190"]
-    return serveProfileDataXml(linkedInUrls)
-#main()
 
-# ngrok http 5000
+    linkedInUrls = linkedInUrls = [
+        "www.linkedin.com/in/panagiotis-m-ab5b6a2a", "https://www.linkedin.com/in/gkyriazopoulos/", "https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/david-bash-0286b357/","https://www.linkedin.com/in/kostas-kourakis-91b7891a1/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/nickolasstefanis/","https://www.linkedin.com/in/georgia-afioni-80028851/","https://gr.linkedin.com/in/george-papadas-418480190"]
+    return serveProfileDataXml(linkedInUrls)
+main()

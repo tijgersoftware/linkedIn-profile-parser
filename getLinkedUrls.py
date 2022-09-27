@@ -1,6 +1,10 @@
 import requests
 import base64
 
+#
+# PHP changes need to be made to request linked in urls
+#
+
 def getLinkedInUrls():
     print('Getting the linkedInUrls from the website')
 
