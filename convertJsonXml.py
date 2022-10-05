@@ -23,13 +23,13 @@ dummyData = True
 devApi = False
 #
 #  Available languages:
-    #    https://en.wikipedia.org/wiki/ISO_639-1
-    #    https://nl.wikipedia.org/wiki/Lijst_van_ISO_639-codes  
-    #    Examples: (e.g. en, ja, ko, pt, zh, zh-TW, ...)
+#    https://en.wikipedia.org/wiki/ISO_639-1
+#    https://nl.wikipedia.org/wiki/Lijst_van_ISO_639-codes
+#    Examples: (e.g. en, ja, ko, pt, zh, zh-TW, ...)
 # resource: https://pypi.org/project/translate/
 
 #
-languages= ["nl","el"]
+languages = ["nl", "el"]
 
 #
 # test george papadas
@@ -75,7 +75,13 @@ def getApiKey():
     if devApi == True:
         return devApiKey()
     else:
-        return "jfjfk"
+        #
+        # subscription api key
+        # h1. https://nubela.co/proxycurl/
+        # USR: admin@dazzle.be
+        # PSW: n5aGxtrM*%9NIwTb
+        #
+        return "aQ795Lo6iylibGFAwYiGeA"
 #
 # convert a number to the name of a month
 #
@@ -214,22 +220,24 @@ def createEducation(amount, profile, data, totalDegrees):
     except:
         print("couldn't find the name of the course")
     try:
-        ET.SubElement(opleiding, "niveau").text = findLevelEducation(data["education"][amount]["degree_name"])    
-    except: 
+        ET.SubElement(opleiding, "niveau").text = findLevelEducation(
+            data["education"][amount]["degree_name"])
+    except:
         print('couldn\'t find the level of education')
 
+
 def findLevelEducation(degree_name):
-    educationLevel= {
-0:"Attest / Certificate",
-1:"Secundair onderwijs",
-2:"Bachelor",
-3:"Master",
-4:"PHD",
-}
-    degree_name=degree_name.lower()
+    educationLevel = {
+        0: "Attest / Certificate",
+        1: "Secundair onderwijs",
+        2: "Bachelor",
+        3: "Master",
+        4: "PHD",
+    }
+    degree_name = degree_name.lower()
     if "certificate" in degree_name or "certification" in degree_name:
         return educationLevel[0]
-    elif 'high school' in degree_name :
+    elif 'high school' in degree_name:
         return educationLevel[1]
     elif 'bachelor' in degree_name:
         return educationLevel[2]
@@ -241,11 +249,11 @@ def findLevelEducation(degree_name):
     elif 'associate' in degree_name:
         return 'bachelor'
     else:
-        translator= Translator(to_lang="en")
+        translator = Translator(to_lang="en")
         translation = translator.translate(degree_name)
         if "certificate" in translation:
             return educationLevel[1]
-        elif 'high school' in translation :
+        elif 'high school' in translation:
             return educationLevel[1]
         elif 'bachelor' in translation:
             return educationLevel[2]
@@ -256,7 +264,9 @@ def findLevelEducation(degree_name):
             return educationLevel[4]
         elif 'associate' in translation:
             return 'bachelor'
-        else: return ""
+        else:
+            return ""
+
 
 def createAllEducations(profile, data):
 
@@ -342,7 +352,7 @@ def createAllProfiles(root, linkedInUrls):
 
         if dummyData == True:
             print('using dummy data')
-            with open("dummy.json", "r") as json_file:
+            with open("dummyLuc.json", "r") as json_file:
                 dataArr = JS.load(json_file)
 
         else:
@@ -464,6 +474,8 @@ def serveProfileDataXml(linkedInUrls):
 def main():
 
     linkedInUrls = linkedInUrls = [
-        "www.linkedin.com/in/panagiotis-m-ab5b6a2a", "https://www.linkedin.com/in/gkyriazopoulos/", "https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/david-bash-0286b357/","https://www.linkedin.com/in/kostas-kourakis-91b7891a1/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/efthymis-charalampidis-62013350/","https://www.linkedin.com/in/nickolasstefanis/","https://www.linkedin.com/in/georgia-afioni-80028851/","https://gr.linkedin.com/in/george-papadas-418480190"]
+        "www.linkedin.com/in/panagiotis-m-ab5b6a2a", "https://www.linkedin.com/in/gkyriazopoulos/", "https://www.linkedin.com/in/thiels/", "https://www.linkedin.com/in/david-bash-0286b357/", "https://www.linkedin.com/in/kostas-kourakis-91b7891a1/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/nickolasstefanis/", "https://www.linkedin.com/in/georgia-afioni-80028851/", "https://gr.linkedin.com/in/george-papadas-418480190"]
     return serveProfileDataXml(linkedInUrls)
-main()
+
+
+
