@@ -10,16 +10,80 @@ import xml.etree.ElementTree as ET
 import requests
 import calendar
 import sys
-import XmlConfig
+
 import random
 from translate import Translator
+
+from xml.etree import cElementTree as ElementTree
+
+class XmlListConfig(list):
+    def __init__(self, aList):
+        for element in aList:
+            if element:
+                # treat like dict
+                if len(element) == 1 or element[0].tag != element[1].tag:
+                    self.append(XmlDictConfig(element))
+                # treat like list
+                elif element[0].tag == element[1].tag:
+                    self.append(XmlListConfig(element))
+            elif element.text:
+                text = element.text.strip()
+                if text:
+                    self.append(text)
+
+
+class XmlDictConfig(dict):
+    '''
+    Example usage:
+
+    >>> tree = ElementTree.parse('your_file.xml')
+    >>> root = tree.getroot()
+    >>> xmldict = XmlDictConfig(root)
+
+    Or, if you want to use an XML string:
+
+    >>> root = ElementTree.XML(xml_string)
+    >>> xmldict = XmlDictConfig(root)
+
+    And then use xmldict for what it is... a dict.
+    '''
+    def __init__(self, parent_element):
+        if parent_element.items():
+            self.update(dict(parent_element.items()))
+        for element in parent_element:
+            if element:
+                # treat like dict - we assume that if the first two tags
+                # in a series are different, then they are all different.
+                if len(element) == 1 or element[0].tag != element[1].tag:
+                    aDict = XmlDictConfig(element)
+                # treat like list - we assume that if the first two tags
+                # in a series are the same, then the rest are the same.
+                else:
+                    # here, we put the list in dictionary; the key is the
+                    # tag name the list elements all share in common, and
+                    # the value is the list itself 
+                    aDict = {element[0].tag: XmlListConfig(element)}
+                # if the tag has attributes, add those to the dict
+                if element.items():
+                    aDict.update(dict(element.items()))
+                self.update({element.tag: aDict})
+            # this assumes that if you've got an attribute in a tag,
+            # you won't be having any text. This may or may not be a 
+            # good idea -- time will tell. It works for the way we are
+            # currently doing XML configuration files...
+            elif element.items():
+                self.update({element.tag: dict(element.items())})
+            # finally, if there are no child tags and no attributes, extract
+            # the text
+            else:
+                self.update({element.tag: element.text})
 #
 # When dummy data is set to true the testmode should be set to true as well.
 # This will fetch the data from dummy.json and will not make a payable api request
 #
 
-testMode = True
-dummyData = True
+testMode = False
+dummyData = False
 devApi = False
 #
 #  Available languages:
@@ -72,16 +136,13 @@ def devApiKey(amountLinkedInUrls):
 
 
 def getApiKey():
-    if devApi == True:
-        return devApiKey()
-    else:
-        #
+
         # subscription api key
         # h1. https://nubela.co/proxycurl/
         # USR: admin@dazzle.be
         # PSW: n5aGxtrM*%9NIwTb
         #
-        return "aQ795Lo6iylibGFAwYiGeA"
+    return "aQ795Lo6iylibGFAwYiGeA"
 #
 # convert a number to the name of a month
 #
@@ -403,7 +464,7 @@ def getData(url, LinkedInUrlsAmount):
     api_endpoint = 'https://nubela.co/proxycurl/api/v2/linkedin'
     linkedin_profile_url = url
     print('get api')
-    api_key = devApiKey(amountLinkedInUrls=LinkedInUrlsAmount)
+    api_key = "aQ795Lo6iylibGFAwYiGeA"
     print('api ket is ' + api_key)
     header_dic = {'Authorization': 'Bearer ' + api_key}
 
@@ -451,7 +512,7 @@ def serveProfileDataXml(linkedInUrls):
 
         tree.write("profileList.xml")
 
-        xmldict = XmlConfig.XmlDictConfig(root)
+        xmldict = XmlDictConfig(root)
 
         return xmldict
 
@@ -473,8 +534,10 @@ def serveProfileDataXml(linkedInUrls):
 
 def main():
 
-    linkedInUrls = linkedInUrls = [
-        "www.linkedin.com/in/panagiotis-m-ab5b6a2a", "https://www.linkedin.com/in/gkyriazopoulos/", "https://www.linkedin.com/in/thiels/", "https://www.linkedin.com/in/david-bash-0286b357/", "https://www.linkedin.com/in/kostas-kourakis-91b7891a1/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/nickolasstefanis/", "https://www.linkedin.com/in/georgia-afioni-80028851/", "https://gr.linkedin.com/in/george-papadas-418480190"]
+    # linkedInUrls = linkedInUrls = [
+    #     "www.linkedin.com/in/panagiotis-m-ab5b6a2a", "https://www.linkedin.com/in/gkyriazopoulos/", "https://www.linkedin.com/in/thiels/", "https://www.linkedin.com/in/david-bash-0286b357/", "https://www.linkedin.com/in/kostas-kourakis-91b7891a1/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/nickolasstefanis/", "https://www.linkedin.com/in/georgia-afioni-80028851/", "https://gr.linkedin.com/in/george-papadas-418480190"]
+    # ontbrekend: Aris Magripis, jeff de paepe, Maui Vindevogel, Usama Mazhar, Sotiris Gekas, Didier Boelens, Georgia Afioni, 
+    linkedInUrls=["https://www.linkedin.com/in/nickolasstefanis","https://www.linkedin.com/in/efthymis-charalampidis-62013350","https://www.linkedin.com/in/georgia-afioni-80028851","www.linkedin.com/in/panagiotis-m-ab5b6a2a","https://www.linkedin.com/in/kostas-kourakis-91b7891a1","https://www.linkedin.com/in/david-bash-0286b357","https://www.linkedin.com/in/sil-colson/","https://www.linkedin.com/in/lucclaeys/","https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/gkyriazopoulos/","https://www.linkedin.com/in/dennis-mohammad-b696b5168/","https://gr.linkedin.com/in/george-papadas-418480190","https://www.linkedin.com/in/gilles-hamelink-118700234/"]
     return serveProfileDataXml(linkedInUrls)
 
 
