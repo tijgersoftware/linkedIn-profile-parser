@@ -1,8 +1,3 @@
-# Program to read JSON file
-# and generate its XML file
-
-# Importing json module and xml
-# module provided by python
 from distutils.log import error
 import json as JS
 from this import d
@@ -424,7 +419,6 @@ def createAllProfiles(root, linkedInUrls):
 
     err = False
 
-    # for x in range (0,len(dataArr)):
 
     print('the length og data ar'+str(len(dataArr)) +
           'the length of linked in URL'+str(len(linkedInUrls)))
@@ -534,9 +528,7 @@ def serveProfileDataXml(linkedInUrls):
 
 def main():
 
-    # linkedInUrls = linkedInUrls = [
-    #     "www.linkedin.com/in/panagiotis-m-ab5b6a2a", "https://www.linkedin.com/in/gkyriazopoulos/", "https://www.linkedin.com/in/thiels/", "https://www.linkedin.com/in/david-bash-0286b357/", "https://www.linkedin.com/in/kostas-kourakis-91b7891a1/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/efthymis-charalampidis-62013350/", "https://www.linkedin.com/in/nickolasstefanis/", "https://www.linkedin.com/in/georgia-afioni-80028851/", "https://gr.linkedin.com/in/george-papadas-418480190"]
-    # ontbrekend: Aris Magripis, jeff de paepe, Maui Vindevogel, Usama Mazhar, Sotiris Gekas, Didier Boelens, Georgia Afioni, 
+
     linkedInUrls=["https://www.linkedin.com/in/nickolasstefanis","https://www.linkedin.com/in/efthymis-charalampidis-62013350","https://www.linkedin.com/in/georgia-afioni-80028851","www.linkedin.com/in/panagiotis-m-ab5b6a2a","https://www.linkedin.com/in/kostas-kourakis-91b7891a1","https://www.linkedin.com/in/david-bash-0286b357","https://www.linkedin.com/in/sil-colson/","https://www.linkedin.com/in/lucclaeys/","https://www.linkedin.com/in/thiels/","https://www.linkedin.com/in/gkyriazopoulos/","https://www.linkedin.com/in/dennis-mohammad-b696b5168/","https://gr.linkedin.com/in/george-papadas-418480190","https://www.linkedin.com/in/gilles-hamelink-118700234/"]
     return serveProfileDataXml(linkedInUrls)
 
