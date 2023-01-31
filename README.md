@@ -1,3 +1,3 @@
 # linkedIn-profile-parser
 
-this connector uses a linkedn unofficial api to retrieve user profile data to serve on xml api. This xml api is build to be consumed by a wordpress website.
+This connector, built with Flask (a Python web framework), utilizes an unofficial LinkedIn API to retrieve user profile data. The collected information is then served as an XML API, specifically created to be consumed by a WordPress website. The XML API acts as a bridge between the LinkedIn platform and the website, providing users with dynamic profile information.
